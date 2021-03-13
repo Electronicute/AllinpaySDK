@@ -5,7 +5,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Description>通联支付 C# 软件开发工具包.</Description>
-    <PackageLicenseExpression>GPL</PackageLicenseExpression>
+    <PackageLicenseExpression></PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Electronicute/AllinpaySDK</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Electronicute/AllinpaySDK</RepositoryUrl>
     <RepositoryType>gitrepo</RepositoryType>
@@ -13,8 +13,10 @@
     <NeutralLanguage>zh-Hans</NeutralLanguage>
     <Copyright>Electronicute 2021</Copyright>
     <Authors>LittleSciMeow</Authors>
-    <Company>w</Company>
+    <Company>Electronicute</Company>
     <Product>Allinpay.SDK</Product>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReleaseNotes>第一版* 只集成了当面付的和查询订单的接口</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,7 +24,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1-beta1" />
+    <None Remove="LICENSE" />
+    <None Remove="LICENSE" />
+    <None Include="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Portable.BouncyCastle" Version="1.8.10" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
     <PackageReference Include="ZXing.Net" Version="0.16.6" />

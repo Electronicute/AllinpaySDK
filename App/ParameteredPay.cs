@@ -14,7 +14,6 @@ namespace Electronicute.Allinpay.SDK.App
         /// <summary>
         /// 构造一个当面付的快捷应用
         /// </summary>
-        /// <param name="ac">一个通联支付的客户端实例</param>
         /// <param name="amt">金额(单位:分)</param>
         /// <param name="oid">订单号</param>
         /// <param name="trxreserve">备注</param>
