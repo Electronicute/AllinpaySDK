@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Electronicute.Allinpay.SDK.Encry
 {
+    /// <summary>
+    /// RSA加密
+    /// </summary>
     public class RSA
     {
         /// <summary>
@@ -12,6 +15,7 @@ namespace Electronicute.Allinpay.SDK.Encry
         /// </summary>
         /// <param name="Header">头部</param>
         /// <param name="Body">查询串</param>
+        /// <param name="RSAprivate_PCKS8">RSA私钥</param>
         /// <returns></returns>
         public static string SignUrl(string Header, string Body,string RSAprivate_PCKS8) => $"{Header}{Body}&sign={System.Web.HttpUtility.UrlEncode(RSA.Sign(Body, RSAprivate_PCKS8), System.Text.Encoding.UTF8)}";
         /// <summary>

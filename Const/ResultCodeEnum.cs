@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Electronicute.Allinpay.SDK
 {
+    /// <summary>
+    /// 枚举的交易返回码
+    /// </summary>
     [Flags]
     public enum ResultCode
     {
@@ -67,6 +70,5 @@ namespace Electronicute.Allinpay.SDK
         /// 其他错误
         /// </summary>
         OtherErr
-
     }
 }

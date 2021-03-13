@@ -1,0 +1,389 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Electronicute.Allinpay.SDK</name>
+    </assembly>
+    <members>
+        <member name="T:Electronicute.Allinpay.SDK.App.CheckPay">
+            <summary>
+            检查支付接口
+            </summary>
+        </member>
+        <member name="P:Electronicute.Allinpay.SDK.App.CheckPay.jo">
+            <summary>
+            元返回量
+            </summary>
+        </member>
+        <member name="P:Electronicute.Allinpay.SDK.App.CheckPay._isOffical">
+            <summary>
+            验签标准(True则为验签成功)
+            </summary>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.App.CheckPay.Get(System.String,System.Int32,System.String,System.Boolean)">
+            <summary>
+            获取一个订单
+            </summary>
+            <param name="trxid">流水号</param>
+            <param name="trxdate">日期</param>
+            <param name="orderid">商户订单号</param>
+            <param name="resendNotify">是否重新发送</param>
+            <returns></returns>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.App.CheckPay.Verify">
+            <summary>
+            验签
+            </summary>
+            <returns>是否为真实值</returns>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.App.CheckPay.Dispose">
+            <summary>
+            适应using写法的析构
+            </summary>
+        </member>
+        <member name="T:Electronicute.Allinpay.SDK.App.ParameteredPay">
+            <summary>
+            当面付的快捷应用接口
+            </summary>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.App.ParameteredPay.#ctor(System.Int64,System.String,System.String,System.Boolean)">
+            <summary>
+            构造一个当面付的快捷应用
+            </summary>
+            <param name="ac">一个通联支付的客户端实例</param>
+            <param name="amt">金额(单位:分)</param>
+            <param name="oid">订单号</param>
+            <param name="trxreserve">备注</param>
+            <param name="_isINSDMF">是否真实验证人付款</param>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.App.ParameteredPay.GenerateBarCode(System.Int32,System.Int32)">
+            <summary>
+            生成二维码的Base64
+            </summary>
+            <param name="width">宽度(默认200)</param>
+            <param name="height">高度(默认200)</param>
+            <returns></returns>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.App.ParameteredPay.Dispose">
+            <summary>
+            析构方案
+            </summary>
+        </member>
+        <member name="T:Electronicute.Allinpay.SDK.AllinpayClient">
+            <summary>
+            静态类接口
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.AllinpayClient.cusid">
+            <summary>
+            商户号
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.AllinpayClient.appid">
+            <summary>
+            应用号
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.AllinpayClient.bca">
+            <summary>
+            二维码号
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.AllinpayClient.md5">
+            <summary>
+            设置的Md5签
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.AllinpayClient.RSAPrivateKey">
+            <summary>
+            RSA的私钥
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.AllinpayClient.RSAPublicKey">
+            <summary>
+            RSA的公钥
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.AllinpayClient.returl">
+            <summary>
+            支付的跳转URL
+            </summary>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.AllinpayClient.CheckTransaction(System.Int32,System.String,System.String,System.Boolean)">
+            <summary>
+            异步查询一个交易
+            </summary>
+            <param name="trxdate">日期</param>
+            <param name="trxid">流水号</param>
+            <param name="orderid">商户单号</param>
+            <param name="_resendNotify">是否重发通知</param>
+            <returns>一个交易Json</returns>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.AllinpayClient.ParameteredPay(System.Int64,System.String,System.String,System.Boolean)">
+            <summary>
+            带参数的当面付调用
+            </summary>
+            <param name="amt">金额(单位:分)</param>
+            <param name="oid">商户订单号</param>
+            <param name="trxreserve">识别信息(详见官方开发文档)</param>
+            <param name="_isINSDMF">是否实名支付(根据类型选)</param>
+            <returns>生成的url,可以发给客户</returns>
+        </member>
+        <member name="T:Electronicute.Allinpay.SDK.PayType">
+            <summary>
+            支付方式(对接文档方便转换)
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP501">
+            <summary>
+            微信支付
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP502">
+            <summary>
+            微信支付撤销
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP503">
+            <summary>
+            微信支付退款
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP511">
+            <summary>
+            支付宝支付
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP512">
+            <summary>
+            支付宝支付撤销
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP513">
+            <summary>
+            支付宝支付退款
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP521">
+            <summary>
+            通联钱包消费
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP522">
+            <summary>
+            通联钱包消费撤销
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP523">
+            <summary>
+            通联钱包消费退货
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP505">
+            <summary>
+            手机QQ支付
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP506">
+            <summary>
+            手机QQ支付撤销
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP507">
+            <summary>
+            手机QQ支付退款
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP551">
+            <summary>
+            银联扫码支付
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP552">
+            <summary>
+            银联扫码撤销
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.PayType.VSP553">
+            <summary>
+            银联扫码退货
+            </summary>
+        </member>
+        <member name="T:Electronicute.Allinpay.SDK.ResultCode">
+            <summary>
+            枚举的交易返回码
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.OK">
+            <summary>
+            交易成功
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.NotFound">
+            <summary>
+            交易不存在
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.Waiting">
+            <summary>
+            交易处理中
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.ResultGathering">
+            <summary>
+            交易处理中
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.BizseqRepeated">
+            <summary>
+            流水号重复
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.ControlFail">
+            <summary>
+            交易控制失败,具体原因查看errmsg
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.CusErr">
+            <summary>
+            渠道商户错误
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.AmountErr">
+            <summary>
+            交易金额小于应收手续费
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.AuthFail">
+            <summary>
+            校验实名信息失败
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.NotPayed">
+            <summary>
+            交易未支付
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.RefundErr">
+            <summary>
+            撤销异常
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.Revoke">
+            <summary>
+            交易被撤销
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.OtherErr1">
+            <summary>
+            其他错误
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.OtherErr2">
+            <summary>
+            其他错误
+            </summary>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.ResultCode.OtherErr">
+            <summary>
+            其他错误
+            </summary>
+        </member>
+        <member name="T:Electronicute.Allinpay.SDK.Encry.Md5">
+            <summary>
+            Md5加密(
+            </summary>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.Encry.Md5.GenerateMD5(System.String)">
+            <summary>
+            MD5字符串加密
+            </summary>
+            <param name="txt"></param>
+            <returns>加密后字符串</returns>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.Encry.Md5.GenerateMD5(System.IO.Stream)">
+            <summary>
+            MD5流加密
+            </summary>
+            <param name="inputStream"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Electronicute.Allinpay.SDK.Encry.RSA">
+            <summary>
+            RSA加密
+            </summary>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.Encry.RSA.SignUrl(System.String,System.String,System.String)">
+            <summary>
+            通联签名URL
+            </summary>
+            <param name="Header">头部</param>
+            <param name="Body">查询串</param>
+            <param name="RSAprivate_PCKS8">RSA私钥</param>
+            <returns></returns>
+        </member>
+        <member name="F:Electronicute.Allinpay.SDK.Encry.RSA.AllinpayPublicKey">
+            <summary>
+            文档生产公钥
+            </summary>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.Encry.RSA.AllinpayVerify(System.String,System.String)">
+            <summary>
+            通联生产模式验证公钥函数
+            </summary>
+            <param name="content">内容</param>
+            <param name="signedString">加密字段</param>
+            <returns></returns>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.Encry.RSA.Sign(System.String,System.String)">
+            <summary>
+            签名
+            </summary>
+            <param name="content">加密内容</param>
+            <param name="privateKey">私钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.Encry.RSA.Verify(System.String,System.String,System.String)">
+            <summary>
+            RSA验证
+            </summary>
+            <param name="content">内容</param>
+            <param name="signedString">已签名字符串</param>
+            <param name="publicKey">公钥</param>
+            <returns></returns>
+        </member>
+        <member name="T:Electronicute.Allinpay.SDK.HttpHelper">
+            <summary>
+            网络接口包
+            </summary>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.HttpHelper.HttpGet(System.String,System.String)">
+            <summary>
+            Get
+            </summary>
+            <param name="Url">URL</param>
+            <param name="contentType">内容类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.HttpHelper.HttpPost(System.String,System.String,System.String)">
+            <summary>
+            POST
+            </summary>
+            <param name="Url">URL</param>
+            <param name="Content">内容</param>
+            <param name="contentType">内容类型</param>
+            <returns></returns>
+        </member>
+        <member name="T:Electronicute.Allinpay.SDK.Service.Pic">
+            <summary>
+            静态图片转换
+            </summary>
+        </member>
+        <member name="M:Electronicute.Allinpay.SDK.Service.Pic.ToBase64(System.Drawing.Bitmap)">
+            <summary>
+            Bitmap转换Base64
+            </summary>
+            <param name="bmp">图片</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

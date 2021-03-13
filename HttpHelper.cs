@@ -7,8 +7,17 @@ using System.Threading.Tasks;
 
 namespace Electronicute.Allinpay.SDK
 {
+    /// <summary>
+    /// 网络接口包
+    /// </summary>
     public class HttpHelper
     {
+        /// <summary>
+        /// Get
+        /// </summary>
+        /// <param name="Url">URL</param>
+        /// <param name="contentType">内容类型</param>
+        /// <returns></returns>
         public static async Task<string> HttpGet(string Url, string contentType= "application/json")
         {
             try
@@ -30,6 +39,13 @@ namespace Electronicute.Allinpay.SDK
                 throw;
             }
         }
+        /// <summary>
+        /// POST
+        /// </summary>
+        /// <param name="Url">URL</param>
+        /// <param name="Content">内容</param>
+        /// <param name="contentType">内容类型</param>
+        /// <returns></returns>
         public static async Task<string> HttpPost(string Url, string Content, string contentType= "application/json")
         {
             try

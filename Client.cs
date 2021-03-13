@@ -2,14 +2,11 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using ZXing;
-using ZXing.QrCode;
 
 namespace Electronicute.Allinpay.SDK
 {
@@ -18,12 +15,33 @@ namespace Electronicute.Allinpay.SDK
     /// </summary>
     public class AllinpayClient
     {
+        /// <summary>
+        /// 商户号
+        /// </summary>
         public static string cusid;
+        /// <summary>
+        /// 应用号
+        /// </summary>
         public static string appid;
+        /// <summary>
+        /// 二维码号
+        /// </summary>
         public static string bca;
+        /// <summary>
+        /// 设置的Md5签
+        /// </summary>
         public static string md5;
+        /// <summary>
+        /// RSA的私钥
+        /// </summary>
         public static string RSAPrivateKey;
+        /// <summary>
+        /// RSA的公钥
+        /// </summary>
         public static string RSAPublicKey;
+        /// <summary>
+        /// 支付的跳转URL
+        /// </summary>
         public static string returl = null;
         /// <summary>
         /// 异步查询一个交易
@@ -49,106 +67,5 @@ namespace Electronicute.Allinpay.SDK
             $"{(_isINSDMF ? "https://syb.allinpay.com/apiweb/insdmf/cuspay" : "https://syb.allinpay.com/sappweb/usertrans/cuspay?")}amt={amt}&appid={appid}&c={bca}&key={md5}&oid={oid}" +
             $"{(returl != null ? ($"&returl={System.Web.HttpUtility.UrlEncode(returl, Encoding.UTF8)}") : "")}&signtype=MD5{(trxreserve != null ? $"&trxreserve={System.Web.HttpUtility.UrlEncode(trxreserve, Encoding.UTF8)}" : "")}" +
             $"&sign={Md5.GenerateMD5($"amt={amt}&appid={appid}&c={bca}&key={md5}&oid={oid}{(returl != null ? ($"&returl={returl}") : "")}&signtype=MD5{(trxreserve != null ? $"&trxreserve={trxreserve}" : "")}").ToUpper()}";
-    }
-    /// <summary>
-    /// 当面付的快捷应用接口
-    /// </summary>
-    public class ParameteredPay : IDisposable
-    {
-        private string urlPos;
-        /// <summary>
-        /// 构造一个当面付的快捷应用
-        /// </summary>
-        /// <param name="ac">一个通联支付的客户端实例</param>
-        /// <param name="amt">金额(单位:分)</param>
-        /// <param name="oid">订单号</param>
-        /// <param name="trxreserve">备注</param>
-        /// <param name="_isINSDMF">是否真实验证人付款</param>
-        public ParameteredPay(long amt, string oid, string trxreserve = null, bool _isINSDMF = false) => this.urlPos = AllinpayClient.ParameteredPay(amt, oid, trxreserve, _isINSDMF);
-        /// <summary>
-        /// 生成二维码的Base64
-        /// </summary>
-        /// <param name="width">宽度(默认200)</param>
-        /// <param name="height">高度(默认200)</param>
-        /// <returns></returns>
-        public string GenerateBarCode(int width = 200, int height = 200)
-        {
-            try
-            {
-                BarcodeWriter writer = new BarcodeWriter
-                {
-                    Format = BarcodeFormat.QR_CODE,
-                    Options = new QrCodeEncodingOptions
-                    {
-                        DisableECI = true,
-                        CharacterSet = "UTF-8",
-                        Width = width,
-                        Height = height,
-                        Margin = 1
-                    }
-                };
-                using Bitmap map = writer.Write(urlPos);
-                return $"data:image/png;base64,{App.Pic.ToBase64(map)}";
-            }
-            catch
-            {
-                throw;
-            }
-        }
-        /// <summary>
-        /// 析构方案
-        /// </summary>
-        public void Dispose() => GC.Collect();
-    }
-    /// <summary>
-    /// 检查支付
-    /// </summary>
-    public class CheckPay : IDisposable
-    {
-        public JObject jo { get; set; }
-        public bool _isOffical { get; set; }
-        /// <summary>
-        /// 获取一个订单
-        /// </summary>
-        /// <param name="trxid">流水号</param>
-        /// <param name="trxdate">日期</param>
-        /// <param name="orderid">商户订单号</param>
-        /// <param name="resendNotify">是否重新发送</param>
-        /// <returns></returns>
-        public async Task<CheckPay> Get(string trxid = null, int trxdate = 0101, string orderid = null, bool resendNotify = false)
-        {
-            jo = await AllinpayClient.CheckTransaction(trxdate, trxid, orderid, resendNotify);
-            _isOffical = Verify();
-            return this;
-        }
-        /// <summary>
-        /// 验签
-        /// </summary>
-        /// <returns>是否为真实值</returns>
-        private bool Verify()
-        {
-            StringBuilder sb = new StringBuilder();
-            string sign="";
-            bool b = false;
-            foreach(var (k,v) in jo)
-            {
-                if (k.Equals("sign"))
-                {
-                    sign = v.ToString();
-                    continue;
-                }
-                if (b)
-                {
-                    sb.Append("&");
-                }
-                sb.Append($"{k}={v}");
-                b = true;
-            }
-            return RSA.AllinpayVerify(sb.ToString(),sign);
-        }
-        /// <summary>
-        /// 适应using写法的析构
-        /// </summary>
-        public void Dispose() => GC.Collect();
     }
 }

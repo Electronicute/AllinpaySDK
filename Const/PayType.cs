@@ -2,6 +2,9 @@
 
 namespace Electronicute.Allinpay.SDK
 {
+    /// <summary>
+    /// 支付方式(对接文档方便转换)
+    /// </summary>
     public enum PayType
     {
         /// <summary>

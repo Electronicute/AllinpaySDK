@@ -1,7 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Description>通联支付 C# 软件开发工具包.</Description>
+    <PackageLicenseExpression>GPL</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Electronicute/AllinpaySDK</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Electronicute/AllinpaySDK</RepositoryUrl>
+    <RepositoryType>gitrepo</RepositoryType>
+    <PackageTags>Allinpay AllinpaySDK</PackageTags>
+    <NeutralLanguage>zh-Hans</NeutralLanguage>
+    <Copyright>Electronicute 2021</Copyright>
+    <Authors>LittleSciMeow</Authors>
+    <Company>w</Company>
+    <Product>Allinpay.SDK</Product>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>D:\Users\David\source\repos\Electronicute.Allinpay.SDK\Electronicute.Allinpay.SDK.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
